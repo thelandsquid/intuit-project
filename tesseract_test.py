@@ -11,13 +11,14 @@ def test_images(images, labels):
             api.SetImageFile(images[i])
             imageText = api.GetUTF8Text()
             predictionAmount, correctPredictions = 0, 0
+            print(imageText)
             for j in range(1,len(labels[i])):
                 labelStringArray = remove_label_and_marks(str(labels[i][j])).split()
                 for labelStr in labelStringArray:
                     if labelStr in imageText:
                         correctPredictions+=1
-                    # else:
-                    #      print('Not recognized: ',labelStr)
+                    else:
+                         print('File: ', images[i],'|||Not recognized: ',labelStr)
                     predictionAmount+=1
 
             predictedForms+=1
@@ -43,25 +44,25 @@ def remove_label_and_marks(str):
     return str
 
 def main():
-    #Clean Data
-    print('CLEAN DATA')
-    images = []
-    for i in range(50):
-        images.append('fifty-fifty-testing\\W2_XL_input_clean_'+str(1000+i)+'.jpg')
-    labels = excel.get_labels_from_excel('fifty-fifty-testing\\labels.xlsx',0,1,50)
-    test_images(images, labels)
-
-    #Noisy Data
-    print('NOISY DATA')
-    images = []
-    for i in range(50):
-        images.append('fifty-fifty-testing\\W2_XL_input_noisy_' + str(1000 + i)+'.jpg')
-    labels = excel.get_labels_from_excel('fifty-fifty-testing\\labels.xlsx',0,1,50)
-    test_images(images, labels)
-
-    # Single Test
-    # images = ['fifty-fifty-testing\\W2_XL_input_clean_1000.jpg']
-    # labels = excel.get_labels_from_excel('fifty-fifty-testing\\labels.xlsx', 0, 1, 1)
+    # #Clean Data
+    # print('CLEAN DATA')
+    # images = []
+    # for i in range(50):
+    #     images.append('fifty-fifty-testing\\W2_XL_input_clean_'+str(1000+i)+'.jpg')
+    # labels = excel.get_labels_from_excel('fifty-fifty-testing\\labels.xlsx',0,1,50)
     # test_images(images, labels)
+    #
+    # #Noisy Data
+    # print('NOISY DATA')
+    # images = []
+    # for i in range(50):
+    #     images.append('fifty-fifty-testing\\W2_XL_input_noisy_' + str(1000 + i)+'.jpg')
+    # labels = excel.get_labels_from_excel('fifty-fifty-testing\\labels.xlsx',0,1,50)
+    # test_images(images, labels)
+
+    #Single Test
+    images = ['fifty-fifty-testing\\W2_XL_input_clean_1003.jpg']
+    labels = excel.get_labels_from_excel('fifty-fifty-testing\\labels.xlsx', 0, 4, 1)
+    test_images(images, labels)
 
 main()
