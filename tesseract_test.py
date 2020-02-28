@@ -15,7 +15,6 @@ def image_accuracy_test(images, labels):
             predictionAmount, correctPredictions = 0, 0
             for j in range(len(labels[i])):
                 labelStringArray = (labels[i][j]).split('\\s')
-                print(labelStringArray)
                 for labelStr in labelStringArray:
                     if labelStr.lower() in imageText:                       #compare lowercase label with output of OCR
                         correctPredictions+=1
@@ -30,7 +29,7 @@ def image_accuracy_test(images, labels):
             times.append(int(round(time.time()*1000))-startTime)
 
     print('Forms Processed: ',predictedForms)
-    print('Forms Properly Recognized: ',correctForms)
+    print('Forms Perfectly Recognized: ',correctForms)
     print('Average Processing Time: ',sum(times)/len(times),' milliseconds')
     print('Average Cell Accuracy: ',100*sum(accuracyPercentages)/len(accuracyPercentages),'% of cells correctly recognized\n')
 
