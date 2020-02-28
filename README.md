@@ -1,0 +1,8 @@
+# intuit-project
+## Command-Line Usage
+* -i : path to folder containing images
+* -gt : path to folder containing .gt files
+```
+python tesseract_test -i ground-truth-test -gt ground-truth-test
+```
+![results](https://github.com/thelandsquid/intuit-project/blob/master/results/ground_truth_test_results.JPG "Test Results")
