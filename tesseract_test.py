@@ -10,6 +10,7 @@ def image_accuracy_test(images, labels):
     with tesserocr.PyTessBaseAPI() as api:
         for i in range(len(images)):
             startTime = int(round(time.time() * 1000))
+            print(images[i])
             api.SetImageFile(images[i])
             imageText = api.GetUTF8Text().lower()                   #converts the output of OCR to lowercase
             predictionAmount, correctPredictions = 0, 0
@@ -53,7 +54,7 @@ def test_fifty_fifty(clean_length, noisy_length):
 
 def test_realistic_noise():
     project_root = os.path.dirname(__file__)
-
+    print(project_root,__file__)
     # Realistic Noisy Data
     print('REALISTIC NOISY DATA')
     images = []
