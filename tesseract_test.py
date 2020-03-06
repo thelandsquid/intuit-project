@@ -12,6 +12,7 @@ def image_accuracy_test(images, labels):
             startTime = int(round(time.time() * 1000))
             api.SetImageFile(images[i])
             imageText = api.GetUTF8Text().lower()                   #converts the output of OCR to lowercase
+            #print(imageText)
             predictionAmount, correctPredictions = 0, 0
             labelStringArray = (labels[i]).split()
             for labelStr in labelStringArray:
@@ -84,7 +85,7 @@ def main():
                     print('Improper amount of ground truth files for '+file_name)
                     exit(1)
                 with open (os.path.join(args.ground_truth_path,text_files[0]),'r') as read_file:
-                    data = read_file.readlines()
+                    data = read_file.read()
                     images.append(os.path.join(args.images_path,file_name))
                     labels.append(data)
         image_accuracy_test(images,labels)
