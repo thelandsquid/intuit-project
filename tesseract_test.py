@@ -10,8 +10,8 @@ def image_accuracy_test(images, labels):
     with tesserocr.PyTessBaseAPI() as api:
         for i in range(len(images)):
             startTime = int(round(time.time() * 1000))
-            api.SetImageFile(images[i])
             print(images[i])
+            api.SetImageFile(images[i])
             imageText = api.GetUTF8Text().lower()                   #converts the output of OCR to lowercase
             predictionAmount, correctPredictions = 0, 0
             labelStringArray = (labels[i]).split()
