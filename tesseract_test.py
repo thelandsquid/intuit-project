@@ -10,7 +10,6 @@ def image_accuracy_test(images, labels):
     with tesserocr.PyTessBaseAPI() as api:
         for i in range(len(images)):
             startTime = int(round(time.time() * 1000))
-            print(images[i])
             api.SetImageFile(images[i])
             imageText = api.GetUTF8Text().lower()                   #converts the output of OCR to lowercase
             predictionAmount, correctPredictions = 0, 0
@@ -34,7 +33,7 @@ def image_accuracy_test(images, labels):
     print('Average Cell Accuracy: ',100*sum(accuracyPercentages)/len(accuracyPercentages),'% of cells correctly recognized\n')
 
 def test_fifty_fifty(clean_length, noisy_length):
-    project_root = os.path.dirname(__file__)
+    project_root = os.path.dirname(os.path.abspath(__file__))
 
     # Clean Data
     print('CLEAN DATA')
@@ -53,8 +52,8 @@ def test_fifty_fifty(clean_length, noisy_length):
     image_accuracy_test(images, labels)
 
 def test_realistic_noise():
-    project_root = os.path.dirname(__file__)
-    print(project_root,__file__)
+    project_root = os.path.dirname(os.path.abspath(__file__))
+
     # Realistic Noisy Data
     print('REALISTIC NOISY DATA')
     images = []
