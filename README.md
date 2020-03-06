@@ -10,3 +10,4 @@ python tesseract_test -i ground-truth-test -gt ground-truth-test
 ```
 python tesseract_test
 ```
+![results](https://github.com/thelandsquid/intuit-project/blob/master/results/realistic_noise_testing_results.JPG "Test Results")

@@ -13,14 +13,13 @@ def image_accuracy_test(images, labels):
             api.SetImageFile(images[i])
             imageText = api.GetUTF8Text().lower()                   #converts the output of OCR to lowercase
             predictionAmount, correctPredictions = 0, 0
-            for j in range(len(labels[i])):
-                labelStringArray = (labels[i][j]).split('\\s')
-                for labelStr in labelStringArray:
-                    if labelStr.lower() in imageText:                       #compare lowercase label with output of OCR
-                        correctPredictions+=1
-                    # else:
-                    #      print('File: ', images[i],'|||Not recognized: ',labelStr)
-                    predictionAmount+=1
+            labelStringArray = (labels[i]).split()
+            for labelStr in labelStringArray:
+                if labelStr.lower() in imageText:                       #compare lowercase label with output of OCR
+                    correctPredictions+=1
+                # else:
+                #      print('File: ', images[i],'|||Not recognized: ',labelStr)
+                predictionAmount+=1
 
             predictedForms+=1
             if correctPredictions/predictionAmount>.999999:
@@ -34,29 +33,33 @@ def image_accuracy_test(images, labels):
     print('Average Cell Accuracy: ',100*sum(accuracyPercentages)/len(accuracyPercentages),'% of cells correctly recognized\n')
 
 def test_fifty_fifty(clean_length, noisy_length):
+    project_root = os.path.dirname(__file__)
+
     # Clean Data
     print('CLEAN DATA')
     images = []
     for i in range(clean_length):
-        images.append('fifty-fifty-testing\\W2_XL_input_clean_' + str(1000 + i) + '.jpg')
-    labels = excel.get_labels_from_excel('fifty-fifty-testing\\labels.xlsx', 0, 1, 50)
+        images.append(str(project_root)+'/fifty-fifty-testing/W2_XL_input_clean_' + str(1000 + i) + '.jpg')
+    labels = excel.get_labels_from_excel(str(project_root)+'/fifty-fifty-testing/labels.xlsx', 0, 1, 50)
     image_accuracy_test(images, labels)
 
     # Noisy Data
     print('NOISY DATA')
     images = []
     for i in range(noisy_length):
-        images.append('fifty-fifty-testing\\W2_XL_input_noisy_' + str(1000 + i) + '.jpg')
-    labels = excel.get_labels_from_excel('fifty-fifty-testing\\labels.xlsx', 0, 1, 50)
+        images.append(str(project_root)+'/fifty-fifty-testing/W2_XL_input_noisy_' + str(1000 + i) + '.jpg')
+    labels = excel.get_labels_from_excel(str(project_root)+'/fifty-fifty-testing/labels.xlsx', 0, 1, 50)
     image_accuracy_test(images, labels)
 
 def test_realistic_noise():
+    project_root = os.path.dirname(__file__)
+
     # Realistic Noisy Data
     print('REALISTIC NOISY DATA')
     images = []
     for i in range(100):
-        images.append('realistic-noise-testing\\W2_XL_input_noisy_' + str(1000 + i) + '.jpg')
-    labels = excel.get_labels_from_excel('realistic-noise-testing\\labels.xlsx', 0, 1, 100)
+        images.append(str(project_root)+'/realistic-noise-testing/W2_XL_input_noisy_' + str(1000 + i) + '.jpg')
+    labels = excel.get_labels_from_excel(str(project_root)+'/realistic-noise-testing/labels.xlsx', 0, 1, 100)
     image_accuracy_test(images, labels)
 
 def main():
