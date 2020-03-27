@@ -2,6 +2,7 @@
 ## Command-Line Usage
 * -i : path to folder containing images
 * -gt : path to folder containing .gt files
+* -o : output text file path, contains more detailed OCR results (stats per document)
 ```
 python tesseract_test -i ground-truth-test -gt ground-truth-test
 ```
